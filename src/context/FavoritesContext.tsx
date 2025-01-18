@@ -25,8 +25,6 @@ export const FavoritesProvider: React.FC<{ children: React.ReactNode }> = ({ chi
   const [favoriteIds, setFavoriteIds] = useState<string[]>(getInitialFavorites);
 
   useEffect(() => {
-    console.log('new favorites', favoriteIds);
-
     localStorage.setItem('favoriteIds', JSON.stringify(favoriteIds));
   }, [favoriteIds]);
 
