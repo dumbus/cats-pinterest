@@ -13,7 +13,6 @@ import { APP_MODE } from 'config/appConfig';
 import { getTestCatData } from 'utils/getTestCatData';
 import classNames from 'classnames';
 
-// TODO: add Error component
 const MainPage = () => {
   const [isLoading, setLoading] = useState(true);
   const [hasError, setError] = useState(false);
@@ -60,8 +59,8 @@ const MainPage = () => {
 
   return (
     <div
-      className={classNames('container', {
-        container_centered: isLoading || hasError,
+      className={classNames('container', styles.mainPage, {
+        [styles.mainPage_centered]: isLoading || hasError,
       })}
     >
       {error}

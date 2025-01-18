@@ -1,7 +1,7 @@
 .list {
-  display: flex;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: repeat(5, 225px);
+  justify-content: space-between;
   gap: 48px;
-  flex-wrap: wrap;
   padding: 48px 0;
 }
