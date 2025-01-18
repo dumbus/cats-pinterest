@@ -1,7 +1,13 @@
 import 'styles/styles.scss';
 
+import MainPage from './pages/main-page';
+
 const App = () => {
-  return <div>App</div>;
+  return (
+    <div>
+      <MainPage />
+    </div>
+  );
 };
 
 export default App;
