@@ -1,0 +1,49 @@
+@use "../../../styles/variables" as *;
+
+.loader {
+  &__container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &_m {
+      width: 60px;
+      height: 60px;
+    }
+
+    &_s {
+      width: 24px;
+      height: 24px;
+    }
+  }
+
+  &__circle {
+    border-radius: 50%;
+    border: 4px solid $primary-color;
+    border-top-color: transparent;
+    transform: rotate(122deg);
+    animation: spin 1s linear infinite;
+
+    &_m {
+      width: 40px;
+      height: 40px;
+      border-width: 5px;
+    }
+
+    &_s {
+      width: 16px;
+      height: 16px;
+      border-width: 2px;
+    }
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(122deg);
+  }
+
+  to {
+    transform: rotate(482deg);
+  }
+}

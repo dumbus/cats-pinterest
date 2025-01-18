@@ -3,18 +3,21 @@ import { useEffect, useState } from 'react';
 import styles from './MainPage.module.scss';
 
 import CatList from './cat-list';
+import Error from 'components/error';
+import Loader from 'components/loader';
 
 import CatService from 'services/CatService';
 import { ICatData } from 'types/entities';
 
 import { APP_MODE } from 'config/appConfig';
 import { getTestCatData } from 'utils/getTestCatData';
+import classNames from 'classnames';
 
 // TODO: add Error component
-// TODO: add Spinner component
 const MainPage = () => {
   const [isLoading, setLoading] = useState(true);
   const [hasError, setError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
   const [catsList, setCatsList] = useState<ICatData[]>([]);
 
   const catService = new CatService();
@@ -30,10 +33,13 @@ const MainPage = () => {
     }
 
     if (APP_MODE === 'dev') {
-      const rawTestData = getTestCatData();
-      const catData = catService._transfrormPaginatedCatsData(rawTestData);
+      // Imitate data loading process
+      setTimeout(() => {
+        const rawTestData = getTestCatData();
+        const catData = catService._transfrormPaginatedCatsData(rawTestData);
 
-      onCatListLoaded(catData);
+        onCatListLoaded(catData);
+      }, 2000);
     }
   };
 
@@ -43,15 +49,24 @@ const MainPage = () => {
   };
 
   const onError = (error: Error) => {
-    console.log(error);
-
     setError(true);
+    setErrorMessage(error.message);
     setLoading(false);
   };
 
+  const error = hasError ? <Error errorMessage={errorMessage} /> : null;
+  const loader = isLoading ? <Loader /> : null;
+  const content = catsList.length ? <CatList catList={catsList} /> : null;
+
   return (
-    <div className="container">
-      <CatList catList={catsList} />
+    <div
+      className={classNames('container', {
+        container_centered: isLoading || hasError,
+      })}
+    >
+      {error}
+      {loader}
+      {content}
     </div>
   );
 };
