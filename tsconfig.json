@@ -23,7 +23,10 @@
     "baseUrl": "./src",
 
     "paths": {
-      "assets/*": ["assets/*"]
+      "app/*": ["app/*"],
+      "assets/*": ["assets/*"],
+      "components/*": ["components/*"],
+      "styles/*": ["styles/*"]
     }
   },
   "include": ["src", ".eslintrx.cjs"],
