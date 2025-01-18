@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 
 import styles from './MainPage.module.scss';
 
-import CatList from './cat-list';
+import CatList from 'components/cat-list';
 import Error from 'components/error';
 import Loader from 'components/loader';
 
