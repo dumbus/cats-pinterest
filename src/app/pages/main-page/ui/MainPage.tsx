@@ -35,7 +35,7 @@ const MainPage = () => {
       // Imitate data loading process
       setTimeout(() => {
         const rawTestData = getTestCatData();
-        const catData = catService._transfrormPaginatedCatsData(rawTestData);
+        const catData = catService._transfrormRawCatData(rawTestData);
 
         onCatListLoaded(catData);
       }, 2000);

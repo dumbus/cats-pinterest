@@ -9,18 +9,31 @@ import heartOutlined from 'assets/icons/heart-outlined.svg';
 
 import imagePlaceholder from 'assets/cat-placeholder.jpg';
 
+import { useFavorites } from 'context/FavoritesContext';
+
 import { ICard } from '../model/types';
 
-const Card: React.FC<ICard> = ({ catData }) => {
-  const [imageSrc, setImageSrc] = useState(catData.imageUrl);
-  const [isLiked, setIsLiked] = useState(false);
+const Card: React.FC<ICard> = ({ id, imageUrl }) => {
+  const { addFavorite, removeFavorite, isFavorite } = useFavorites();
+
+  const [imageSrc, setImageSrc] = useState(imageUrl);
+  const [isLiked, setIsLiked] = useState(isFavorite(id));
 
   const handleButtonClick = () => {
     setIsLiked((prev) => !prev);
+    toggleFavorite();
   };
 
   const handleImageError = () => {
     setImageSrc(imagePlaceholder);
+  };
+
+  const toggleFavorite = () => {
+    if (isFavorite(id)) {
+      removeFavorite(id);
+    } else {
+      addFavorite(id);
+    }
   };
 
   return (

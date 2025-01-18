@@ -7,7 +7,7 @@ import { ICatList } from '../model/types';
 import styles from './CatList.module.scss';
 
 const CatList: React.FC<ICatList> = ({ catList }) => {
-  const list = catList.map((catData) => <Card key={catData.id} catData={catData} />);
+  const list = catList.map(({ id, imageUrl }) => <Card key={id} id={id} imageUrl={imageUrl} />);
 
   return <div className={styles.list}>{list}</div>;
 };
