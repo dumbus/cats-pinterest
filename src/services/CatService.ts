@@ -10,7 +10,7 @@ class CatService {
 
   constructor() {
     this._apiClient = axios.create({
-      baseURL: 'https://api.thecatapi.com/v1/images/',
+      baseURL: 'https://api.thecatapi.com/v1/images',
       headers: {
         'Content-Type': 'application/json',
         'x-api-key': import.meta.env.VITE_API_KEY,
@@ -48,18 +48,47 @@ class CatService {
       },
     });
 
-    const catData = this._transfrormPaginatedCatsData(rawCatData);
+    const catData = this._transfrormRawCatData(rawCatData);
 
     return catData;
   };
 
-  _transfrormPaginatedCatsData = (rawCatData: IRawCatData[]) => {
-    return rawCatData.map((rawCatItem) => {
-      return {
-        id: rawCatItem.id,
-        imageUrl: rawCatItem.url,
-      };
+  getFavoriteCats = async (favoriteIds: string[]): Promise<ICatData[]> => {
+    const catPromises = favoriteIds.map(async (id) => {
+      return this._getRawCatById(id).catch((error) => {
+        console.error(`Failed to fetch cat with id: ${id}`, error);
+
+        return null;
+      });
     });
+
+    const rawCatData = await Promise.all(catPromises);
+    const favoriteCatData = this._transfrormRawCatData(rawCatData);
+
+    return favoriteCatData;
+  };
+
+  _getRawCatById = async (id: string): Promise<IRawCatData> => {
+    const rawCatData = await this.getResource<IRawCatData>({
+      url: `/${id}`,
+    });
+
+    return rawCatData;
+  };
+
+  _transfrormRawCatData = (rawCatData: (IRawCatData | null)[]) => {
+    const transformedCatData: ICatData[] = [];
+
+    rawCatData.forEach((rawCatItem) => {
+      if (rawCatItem) {
+        transformedCatData.push({
+          id: rawCatItem.id,
+          imageUrl: rawCatItem.url,
+        });
+      }
+    });
+
+    return transformedCatData;
   };
 }
 
