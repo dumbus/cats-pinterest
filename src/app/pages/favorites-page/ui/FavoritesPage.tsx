@@ -17,29 +17,44 @@ import { ICatData } from 'types/entities';
 import styles from './FavoritesPage.module.scss';
 import { getTestFavoritesData } from 'utils/getTestData';
 
+import { getCurrentPageData, getHasMore } from 'utils/helpers';
+
 const FavoritesPage = () => {
   const [isLoading, setLoading] = useState(true);
+  const [isLoadingMore, setLoadingMore] = useState(false);
+  const [isFirstLoad, setIsFirstLoad] = useState(true);
   const [hasError, setError] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
   const [favoritesList, setFavoritesList] = useState<ICatData[]>([]);
+  const [page, setPage] = useState(1);
+  const [hasMore, setHasMore] = useState(false);
 
   const catService = new CatService();
   const { favoriteIds } = useFavorites();
 
   useEffect(() => {
     setLoading(true);
-    onRequest(favoriteIds);
+    onRequest(page);
   }, []);
 
-  const onRequest = (favoriteIds: string[]) => {
+  useEffect(() => {
+    if (!isFirstLoad) {
+      setLoadingMore(true);
+      onRequest(page);
+    }
+  }, [page]);
+
+  const onRequest = (page: number) => {
+    const currentFavoriteIds = getCurrentPageData(page, favoriteIds);
+
     if (APP_MODE === 'prod') {
-      catService.getFavoriteCats(favoriteIds).then(onFavoritesListLoaded).catch(onError);
+      catService.getFavoriteCats(currentFavoriteIds).then(onFavoritesListLoaded).catch(onError);
     }
 
     if (APP_MODE === 'dev') {
       // Imitate data loading process
       setTimeout(() => {
-        const rawTestData = getTestFavoritesData(favoriteIds);
+        const rawTestData = getTestFavoritesData(page, favoriteIds);
         const catData = catService._transfrormRawCatData(rawTestData);
 
         onFavoritesListLoaded(catData);
@@ -48,14 +63,28 @@ const FavoritesPage = () => {
   };
 
   const onFavoritesListLoaded = (favoritesListData: ICatData[]) => {
-    setFavoritesList(favoritesListData);
+    if (isFirstLoad) {
+      setFavoritesList(favoritesListData);
+      setIsFirstLoad(false);
+    } else {
+      setFavoritesList((prevFavorites) => [...prevFavorites, ...favoritesListData]);
+    }
+
+    setHasMore(getHasMore(page, favoriteIds));
+
     setLoading(false);
+    setLoadingMore(false);
   };
 
   const onError = (error: Error) => {
     setError(true);
     setErrorMessage(error.message);
+    setLoadingMore(false);
     setLoading(false);
+  };
+
+  const loadMoreFavorites = () => {
+    setPage((prevPage) => prevPage + 1);
   };
 
   const handleRemoveFavorite = (id: string) => {
@@ -64,7 +93,15 @@ const FavoritesPage = () => {
 
   const error = hasError ? <Error errorMessage={errorMessage} /> : null;
   const loader = isLoading ? <Loader /> : null;
-  const content = !isLoading && !hasError && <CatList catList={favoritesList} onRemove={handleRemoveFavorite} />;
+  const content = !isLoading && !hasError && (
+    <CatList
+      catList={favoritesList}
+      isLoading={isLoadingMore}
+      onLoadMore={loadMoreFavorites}
+      onRemove={handleRemoveFavorite}
+      renderButton={hasMore}
+    />
+  );
 
   return (
     <div

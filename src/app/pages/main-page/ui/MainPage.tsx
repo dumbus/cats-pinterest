@@ -5,7 +5,6 @@ import styles from './MainPage.module.scss';
 import CatList from 'components/cat-list';
 import Error from 'components/error';
 import Loader from 'components/loader';
-import NotFound from 'components/not-found';
 
 import CatService from 'services/CatService';
 import { ICatData } from 'types/entities';
@@ -31,13 +30,15 @@ const MainPage = () => {
   }, []);
 
   useEffect(() => {
-    if (page > 1) {
+    if (!isFirstLoad) {
       setLoadingMore(true);
       onRequest(page);
     }
   }, [page]);
 
   const onRequest = (page: number) => {
+    console.log('request');
+
     if (APP_MODE === 'prod') {
       catService.getCats(page).then(onCatListLoaded).catch(onError);
     }
@@ -45,7 +46,7 @@ const MainPage = () => {
     if (APP_MODE === 'dev') {
       // Imitate data loading process
       setTimeout(() => {
-        const rawTestData = getTestCatData();
+        const rawTestData = getTestCatData(page);
         const catData = catService._transfrormRawCatData(rawTestData);
 
         onCatListLoaded(catData);
