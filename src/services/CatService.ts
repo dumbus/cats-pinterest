@@ -39,7 +39,7 @@ class CatService {
     }
   };
 
-  getCats = async (page = 1): Promise<ICatData[]> => {
+  getCats = async (page: number): Promise<ICatData[]> => {
     const rawCatData = await this.getResource<IRawCatData[]>({
       url: '/search',
       params: {
