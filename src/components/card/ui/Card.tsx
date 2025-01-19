@@ -18,6 +18,7 @@ const Card: React.FC<ICard> = ({ id, imageUrl, onRemove }) => {
 
   const [imageSrc, setImageSrc] = useState(imageUrl);
   const [isLiked, setIsLiked] = useState(isFavorite(id));
+  const [isImageLoading, setIsImageLoading] = useState(true);
 
   const handleButtonClick = () => {
     setIsLiked((prev) => !prev);
@@ -26,6 +27,10 @@ const Card: React.FC<ICard> = ({ id, imageUrl, onRemove }) => {
 
   const handleImageError = () => {
     setImageSrc(imagePlaceholder);
+  };
+
+  const handleImageLoad = () => {
+    setIsImageLoading(false);
   };
 
   const toggleFavorite = () => {
@@ -42,7 +47,18 @@ const Card: React.FC<ICard> = ({ id, imageUrl, onRemove }) => {
 
   return (
     <div className={styles.card}>
-      <img className={styles.card__image} src={imageSrc} alt="image of cat" onError={handleImageError} />
+      {isImageLoading && <div className={styles.card__skeleton} />}
+
+      {/* <div className={styles.card__skeleton} /> */}
+      <img
+        className={classnames(styles.card__image, {
+          [styles.card__image_hidden]: isImageLoading,
+        })}
+        src={imageSrc}
+        alt="image of cat"
+        onError={handleImageError}
+        onLoad={handleImageLoad}
+      />
 
       <button className={classnames(styles.card__button)} onClick={handleButtonClick}>
         <img
