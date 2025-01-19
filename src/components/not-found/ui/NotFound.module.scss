@@ -16,6 +16,13 @@
     font-size: 24px;
     font-weight: bold;
     color: $primary-active-color;
+    text-align: center;
+  }
+
+  @media (max-width: 576px) {
+    &__image {
+      width: 300px;
+    }
   }
 }
 

@@ -40,4 +40,8 @@
       transition: none;
     }
   }
+
+  @media (max-width: 576px) {
+    justify-content: center;
+  }
 }

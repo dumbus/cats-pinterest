@@ -33,6 +33,22 @@
     transition: all 0.15s ease-in;
     opacity: 0;
 
+    @media (max-width: 768px) {
+      right: 12px;
+      bottom: 12px;
+    }
+
+    @media (max-width: 400px) {
+      right: 24px;
+      bottom: 24px;
+    }
+
+    // У устроств без hover-эффектов кнопки отображаются сразу
+    @media (hover: none) {
+      visibility: visible;
+      opacity: 1;
+    }
+
     &:hover {
       .card__heartDefault,
       .card__heartActive {
@@ -65,5 +81,25 @@
     &_visible {
       opacity: 1;
     }
+  }
+
+  @media (max-width: 1439px) {
+    width: 200px;
+    height: 200px;
+  }
+
+  @media (max-width: 768px) {
+    width: 160px;
+    height: 160px;
+  }
+
+  @media (max-width: 576px) {
+    width: 170px;
+    height: 170px;
+  }
+
+  @media (max-width: 400px) {
+    width: 225px;
+    height: 225px;
   }
 }

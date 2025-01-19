@@ -14,10 +14,15 @@ const Error: React.FC<IError> = ({ errorMessage }) => {
     <div className={errorClass}>
       <img className={styles.error__image} src={errorImage} alt="error icon" />
 
-      <div className={styles.error__title}>Oops... Something went wrong...</div>
-      <div className={styles.error__subtitle}>
-        Error: <b>{errorMessage}</b>
-      </div>
+      <div className={classNames(styles.error__text, styles.error__title)}>Ой... Что-то пошло не так...</div>
+
+      {errorMessage.length ? (
+        <div className={classNames(styles.error__text, styles.error__subtitle)}>
+          Ошибка: <b>{errorMessage}</b>
+        </div>
+      ) : (
+        ''
+      )}
     </div>
   );
 };
