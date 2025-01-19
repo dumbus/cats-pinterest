@@ -23,6 +23,7 @@ const CatList: React.FC<ICatList> = ({ catList, isLoading, renderButton = true, 
       <div className={styles.list}>{list}</div>
 
       {isEmpty && <NotFound />}
+
       {!isEmpty && renderButton && (
         <Button isLoading={isLoading} onClick={onLoadMore} buttonText="Загрузить ещё котиков" />
       )}
