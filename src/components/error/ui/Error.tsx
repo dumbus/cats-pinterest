@@ -3,9 +3,9 @@ import React from 'react';
 
 import errorImage from 'assets/icons/error.svg';
 
-import styles from './Error.module.scss';
-
 import { IError } from '../model/types';
+
+import styles from './Error.module.scss';
 
 const Error: React.FC<IError> = ({ errorMessage }) => {
   const errorClass = classNames(styles.error);

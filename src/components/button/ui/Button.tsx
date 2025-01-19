@@ -1,9 +1,10 @@
 import React from 'react';
-import styles from './Button.module.scss';
 
 import Loader from 'components/loader';
 
 import { IButton } from '../model/types';
+
+import styles from './Button.module.scss';
 
 const Button: React.FC<IButton> = ({ buttonText, isLoading = false, onClick }) => {
   return (

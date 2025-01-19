@@ -1,11 +1,12 @@
 import { Link } from 'react-router-dom';
-import { ROUTES } from 'config/routes';
 
 import notFoundImage from 'assets/not-found.jpg';
 
-import styles from './NotFound.module.scss';
-
 import Button from 'components/button';
+
+import { ROUTES } from 'config/routes';
+
+import styles from './NotFound.module.scss';
 
 const NotFound = () => {
   return (

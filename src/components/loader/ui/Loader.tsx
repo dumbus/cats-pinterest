@@ -1,9 +1,9 @@
 import classNames from 'classnames';
 import React from 'react';
 
-import styles from './Loader.module.scss';
-
 import { ILoader } from '../model/types';
+
+import styles from './Loader.module.scss';
 
 const Loader: React.FC<ILoader> = ({ size = 'm', color = 'primary' }) => {
   const containerClassName = classNames(styles.loader__container, {

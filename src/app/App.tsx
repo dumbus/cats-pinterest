@@ -2,11 +2,11 @@ import { BrowserRouter, Routes, Route, Navigate, Outlet } from 'react-router-dom
 
 import 'styles/styles.scss';
 
-import Header from './pages/header/ui/Header';
-import MainPage from './pages/main-page';
-import FavoritesPage from './pages/favorites-page';
-
 import { ROUTES } from 'config/routes';
+
+import FavoritesPage from './pages/favorites-page';
+import Header from './pages/header';
+import MainPage from './pages/main-page';
 
 const Main = () => {
   return (

@@ -1,5 +1,5 @@
-import { ROUTES } from 'config/routes';
 import { CARDS_PER_PAGE } from 'config/appConfig';
+import { ROUTES } from 'config/routes';
 
 export const getInitialFavorites = (): string[] => {
   const storedFavorites = localStorage.getItem('favoriteIds');

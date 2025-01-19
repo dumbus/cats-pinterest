@@ -1,17 +1,16 @@
+import classNames from 'classnames';
 import { useEffect, useState } from 'react';
-
-import styles from './MainPage.module.scss';
 
 import CatList from 'components/cat-list';
 import Error from 'components/error';
 import Loader from 'components/loader';
 
+import { APP_MODE } from 'config/appConfig';
 import CatService from 'services/CatService';
 import { ICatData } from 'types/entities';
-
-import { APP_MODE } from 'config/appConfig';
 import { getTestCatData } from 'utils/getTestData';
-import classNames from 'classnames';
+
+import styles from './MainPage.module.scss';
 
 const MainPage = () => {
   const [isLoading, setLoading] = useState(true);
@@ -27,6 +26,7 @@ const MainPage = () => {
   useEffect(() => {
     setLoading(true);
     onRequest(page);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -34,17 +34,17 @@ const MainPage = () => {
       setLoadingMore(true);
       onRequest(page);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [page]);
 
   const onRequest = (page: number) => {
-    console.log('request');
-
     if (APP_MODE === 'prod') {
       catService.getCats(page).then(onCatListLoaded).catch(onError);
     }
 
+    // Оставляю логику получения тестовых данных в коде, чтобы была возможность продолжать разработку
     if (APP_MODE === 'dev') {
-      // Imitate data loading process
+      // timeout имитирует процесс получения данных с сервера
       setTimeout(() => {
         const rawTestData = getTestCatData(page);
         const catData = catService._transfrormRawCatData(rawTestData);

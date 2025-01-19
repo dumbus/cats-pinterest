@@ -56,6 +56,7 @@ class CatService {
   getFavoriteCats = async (favoriteIds: string[]): Promise<ICatData[]> => {
     const catPromises = favoriteIds.map(async (id) => {
       return this._getRawCatById(id).catch((error) => {
+        // eslint-disable-next-line no-console
         console.error(`Failed to fetch cat with id: ${id}`, error);
 
         return null;

@@ -1,17 +1,16 @@
-import React, { useState } from 'react';
 import classnames from 'classnames';
+import React, { useState } from 'react';
 
-import styles from './Card.module.scss';
-
+import imagePlaceholder from 'assets/cat-placeholder.jpg';
 import heartActive from 'assets/icons/heart-active.svg';
 import heartFilled from 'assets/icons/heart-filled.svg';
 import heartOutlined from 'assets/icons/heart-outlined.svg';
 
-import imagePlaceholder from 'assets/cat-placeholder.jpg';
-
 import { useFavorites } from 'context/FavoritesContext';
 
 import { ICard } from '../model/types';
+
+import styles from './Card.module.scss';
 
 const Card: React.FC<ICard> = ({ id, imageUrl, onRemove }) => {
   const { addFavorite, removeFavorite, isFavorite } = useFavorites();

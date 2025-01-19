@@ -1,23 +1,19 @@
-import { useEffect, useState } from 'react';
 import classNames from 'classnames';
+import { useEffect, useState } from 'react';
 
-// const tmpFavs = ['ebv', '0XYvRd7oD'];
-
+import CatList from 'components/cat-list';
 import Error from 'components/error';
 import Loader from 'components/loader';
-import CatList from 'components/cat-list';
 
 import { APP_MODE } from 'config/appConfig';
-
-import CatService from 'services/CatService';
 import { useFavorites } from 'context/FavoritesContext';
-
+import CatService from 'services/CatService';
 import { ICatData } from 'types/entities';
 
-import styles from './FavoritesPage.module.scss';
 import { getTestFavoritesData } from 'utils/getTestData';
-
 import { getCurrentPageData, getHasMore } from 'utils/helpers';
+
+import styles from './FavoritesPage.module.scss';
 
 const FavoritesPage = () => {
   const [isLoading, setLoading] = useState(true);
@@ -35,6 +31,7 @@ const FavoritesPage = () => {
   useEffect(() => {
     setLoading(true);
     onRequest(page);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -42,6 +39,7 @@ const FavoritesPage = () => {
       setLoadingMore(true);
       onRequest(page);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [page]);
 
   const onRequest = (page: number) => {
@@ -51,8 +49,9 @@ const FavoritesPage = () => {
       catService.getFavoriteCats(currentFavoriteIds).then(onFavoritesListLoaded).catch(onError);
     }
 
+    // Оставляю логику получения тестовых данных в коде, чтобы была возможность продолжать разработку
     if (APP_MODE === 'dev') {
-      // Imitate data loading process
+      // timeout имитирует процесс получения данных с сервера
       setTimeout(() => {
         const rawTestData = getTestFavoritesData(page, favoriteIds);
         const catData = catService._transfrormRawCatData(rawTestData);
