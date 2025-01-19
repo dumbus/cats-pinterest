@@ -12,11 +12,17 @@
 ## Использованные технологии и инструменты
 
 ### 1. [TypeScript](https://www.typescriptlang.org/)
+
 ### 2. [React](https://react.dev/)
+
 ### 3. [React Router](https://reactrouter.com/en/main)
+
 ### 4. [SCSS](https://sass-lang.com/)
+
 ### 5. [ESLint](https://eslint.org/)
+
 ### 6. [Prettier](https://prettier.io/)
+
 ### 7. [Vite](https://vite.dev/)
 
 ## Что реализовано в приложении
@@ -75,13 +81,13 @@ npm install
 4. Запустить приложение:
 
 ```
-npm run start
+npm run dev
 ```
 
 5. Открыть приложение в браузере:
 
 ```
-http://localhost:{port}
+http://localhost:{port}/cats-pinterest/
 ```
 
 > По умолчанию port = 5173 (используется [Vite](https://vite.dev/))

@@ -1,4 +1,4 @@
 export const ROUTES = {
-  main: () => '/cats',
-  favorites: () => `/cats/favorites`,
+  main: () => '/cats-pinterest/cats',
+  favorites: () => `/cats-pinterest/cats/favorites`,
 };
