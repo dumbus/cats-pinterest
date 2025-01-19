@@ -1,14 +1,17 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  padding-top: 64px;
+
+  &_withFooter {
+    padding-bottom: 48px;
+  }
+}
+
 .list {
   display: grid;
   grid-template-columns: repeat(5, 225px);
   justify-content: space-between;
   gap: 48px;
   padding: 48px 0;
-
-  &_empty {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-  }
 }

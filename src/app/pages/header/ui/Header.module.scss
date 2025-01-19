@@ -5,11 +5,9 @@
   top: 0;
   width: 100vw;
   height: 64px;
-
   display: flex;
   align-items: center;
   justify-content: flex-start;
-
   background-color: $primary-color;
 
   font-size: 14px;
@@ -34,11 +32,10 @@
 
     &:hover {
       background-color: $primary-hover-color;
-      opacity: 0.9;
     }
 
     &:active {
-      background-color: $primary-hover-color;
+      background-color: $primary-active-color;
       opacity: 1;
       transition: none;
     }

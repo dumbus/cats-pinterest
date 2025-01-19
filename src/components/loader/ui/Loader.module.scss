@@ -19,10 +19,18 @@
 
   &__circle {
     border-radius: 50%;
-    border: 4px solid $primary-color;
-    border-top-color: transparent;
     transform: rotate(122deg);
     animation: spin 1s linear infinite;
+
+    &_primary {
+      border: 4px solid $primary-color;
+      border-top-color: transparent;
+    }
+
+    &_white {
+      border: 4px solid $white-color;
+      border-top-color: transparent;
+    }
 
     &_m {
       width: 40px;
