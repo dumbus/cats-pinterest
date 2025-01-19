@@ -1,0 +1,11 @@
+.favoritesPage {
+  min-height: 100vh;
+  margin: 0 auto;
+  padding-top: 64px;
+
+  &_centered {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}

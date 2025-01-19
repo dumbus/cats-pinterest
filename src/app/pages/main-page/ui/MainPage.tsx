@@ -10,7 +10,7 @@ import CatService from 'services/CatService';
 import { ICatData } from 'types/entities';
 
 import { APP_MODE } from 'config/appConfig';
-import { getTestCatData } from 'utils/getTestCatData';
+import { getTestCatData } from 'utils/getTestData';
 import classNames from 'classnames';
 
 const MainPage = () => {

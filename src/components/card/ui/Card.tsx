@@ -13,7 +13,7 @@ import { useFavorites } from 'context/FavoritesContext';
 
 import { ICard } from '../model/types';
 
-const Card: React.FC<ICard> = ({ id, imageUrl }) => {
+const Card: React.FC<ICard> = ({ id, imageUrl, onRemove }) => {
   const { addFavorite, removeFavorite, isFavorite } = useFavorites();
 
   const [imageSrc, setImageSrc] = useState(imageUrl);
@@ -31,6 +31,10 @@ const Card: React.FC<ICard> = ({ id, imageUrl }) => {
   const toggleFavorite = () => {
     if (isFavorite(id)) {
       removeFavorite(id);
+
+      if (onRemove) {
+        onRemove(id);
+      }
     } else {
       addFavorite(id);
     }
