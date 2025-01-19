@@ -1,4 +1,4 @@
-## Энциклопедия кино - Интерактивный справочник по миру кинематографа
+## Тестовое задание для стажировки Учи.Ру - "Кошачий пинтерест"
 
 ![react version](https://img.shields.io/badge/react-18.3.1-blue)
 ![react-dom version](https://img.shields.io/badge/react--dom-18.3.1-blue)
