@@ -64,13 +64,12 @@ const FavoritesPage = () => {
 
   const error = hasError ? <Error errorMessage={errorMessage} /> : null;
   const loader = isLoading ? <Loader /> : null;
-  //TODO: add notFound component
-  const content = favoritesList.length ? <CatList catList={favoritesList} onRemove={handleRemoveFavorite} /> : null;
+  const content = !isLoading && !hasError && <CatList catList={favoritesList} onRemove={handleRemoveFavorite} />;
 
   return (
     <div
       className={classNames('container', styles.favoritesPage, {
-        [styles.favoritesPage_centered]: isLoading || hasError,
+        [styles.favoritesPage_centered]: isLoading || hasError || !favoritesList.length,
       })}
     >
       {error}

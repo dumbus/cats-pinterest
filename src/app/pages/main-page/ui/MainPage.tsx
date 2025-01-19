@@ -5,6 +5,7 @@ import styles from './MainPage.module.scss';
 import CatList from 'components/cat-list';
 import Error from 'components/error';
 import Loader from 'components/loader';
+import NotFound from 'components/not-found';
 
 import CatService from 'services/CatService';
 import { ICatData } from 'types/entities';
@@ -55,12 +56,12 @@ const MainPage = () => {
 
   const error = hasError ? <Error errorMessage={errorMessage} /> : null;
   const loader = isLoading ? <Loader /> : null;
-  const content = catsList.length ? <CatList catList={catsList} /> : null;
+  const content = !isLoading && !hasError && <CatList catList={catsList} />;
 
   return (
     <div
       className={classNames('container', styles.mainPage, {
-        [styles.mainPage_centered]: isLoading || hasError,
+        [styles.mainPage_centered]: isLoading || hasError || !catsList.length,
       })}
     >
       {error}
