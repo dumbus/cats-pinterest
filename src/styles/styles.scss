@@ -1,0 +1,52 @@
+@use "./fonts" as *;
+@use "./variables" as *;
+
+html,
+body {
+  font-family: "Roboto";
+  margin: 0;
+  padding: 0;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+figure,
+pre {
+  margin: 0;
+}
+
+a {
+  text-decoration: none;
+}
+
+button {
+  padding: 0;
+  border: none;
+  background: transparent;
+}
+
+.container {
+  padding: 0 64px;
+
+  @media (max-width: 992px) {
+    padding: 0 48px;
+  }
+
+  @media (max-width: 768px) {
+    padding: 0 24px;
+  }
+
+  @media (max-width: 576px) {
+    padding: 0 16px;
+  }
+}

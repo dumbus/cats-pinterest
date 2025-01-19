@@ -1,0 +1,128 @@
+.card {
+  position: relative;
+  width: 225px;
+  height: 225px;
+  transition: all 0.15s ease-in;
+  cursor: pointer;
+
+  &:hover {
+    transform: scale(1.1);
+    box-shadow: 0px 6px 5px 0px rgba(0, 0, 0, 24%), 0px 9px 18px 0px rgba(0, 0, 0, 18%);
+
+    .card__button {
+      visibility: visible;
+      opacity: 1;
+    }
+  }
+
+  &__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+
+    &_hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+  }
+
+  &__skeleton {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, #bbdefb 25%, #e3f2fd 50%, #90caf9 75%);
+    background-size: 200% 100%;
+    animation: skeleton-loading 1s infinite ease-in-out;
+  }
+
+  &__button {
+    position: absolute;
+    right: 24px;
+    bottom: 24px;
+    width: 48px;
+    height: 48px;
+    display: flex;
+    cursor: pointer;
+    visibility: hidden;
+    transition: all 0.15s ease-in;
+    opacity: 0;
+
+    @media (max-width: 768px) {
+      right: 12px;
+      bottom: 12px;
+    }
+
+    @media (max-width: 400px) {
+      right: 24px;
+      bottom: 24px;
+    }
+
+    // У устройств без hover-эффектов кнопки отображаются сразу
+    @media (hover: none) {
+      visibility: visible;
+      opacity: 1;
+    }
+
+    &:hover {
+      .card__heartDefault,
+      .card__heartActive {
+        opacity: 0;
+      }
+
+      .card__heartFilled {
+        opacity: 1;
+      }
+    }
+
+    &:active {
+      .card__heartActive {
+        opacity: 1;
+      }
+
+      .card__heartDefault,
+      .card__heartFilled {
+        opacity: 0;
+      }
+    }
+  }
+
+  &__heart {
+    position: absolute;
+    transition: opacity 0.15s ease-in;
+    opacity: 0;
+    pointer-events: none;
+
+    &_visible {
+      opacity: 1;
+    }
+  }
+
+  @media (max-width: 1439px) {
+    width: 200px;
+    height: 200px;
+  }
+
+  @media (max-width: 768px) {
+    width: 160px;
+    height: 160px;
+  }
+
+  @media (max-width: 576px) {
+    width: 170px;
+    height: 170px;
+  }
+
+  @media (max-width: 400px) {
+    width: 225px;
+    height: 225px;
+  }
+}
+
+@keyframes skeleton-loading {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}

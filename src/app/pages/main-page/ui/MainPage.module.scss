@@ -1,0 +1,10 @@
+.mainPage {
+  min-height: 100vh;
+  margin: 0 auto;
+
+  &_centered {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
